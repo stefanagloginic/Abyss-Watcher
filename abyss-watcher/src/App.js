@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import DisastersParent from './Components/DisastersParent'
 import './App.css';
 
 class App extends Component {
@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <p>Hello Abyss Watcher!</p>
+        <DisastersParent />
       </div>
     );
   }
