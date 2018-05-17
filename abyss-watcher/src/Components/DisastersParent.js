@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import DisastersMap from './DisastersMap';
-import key from '../Credentials/key'
-
-//import the GoogleApiWrapper
-import {Map, GoogleApiWrapper, Marker } from 'google-maps-react'
-
+import '../Stylesheets/DisastersParent.css'
 
 class DisastersParent extends Component {
   render() {
     return (
- 		<DisastersMap google={this.props.google} />
+    	<div className="parent_wrapper">
+    		Hello Map
+    	</div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: key.googleMapKey
-})(DisastersParent)
+export default DisastersParent
