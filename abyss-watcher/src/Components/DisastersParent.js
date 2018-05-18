@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import DisastersMap from './DisastersMap';
-import worldData from 'world-atlas/world/50m.json'
+import worldData from 'world-atlas/world/110m.json'
 import usData from '../us-110m.json'
-import { max } from 'd3-array'
 import { geoMercator, geoAlbers } from 'd3-geo'
 import { select } from 'd3-selection'
-import { feature } from "topojson-client"
+import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
-// import topoData from '../build/simplified_topoJSON.json';
 
 class DisastersParent extends Component {
 	constructor(props){
@@ -34,8 +32,6 @@ class DisastersParent extends Component {
 		    .center( [0, 0] )
 		    .translate( [width/2, height/2] );
 
-		console.log(usData);
-		console.log(worldData)
 		var geoPath = d3.geoPath()
     		.projection( albersProjection );
 
@@ -65,8 +61,8 @@ class DisastersParent extends Component {
     }
 
     zoomed() {
-    	console.log('hello!');
     	var node = this.node;
+
 		select(node)
 	    	.select('g')
 	    	.attr("transform", d3.event.transform);
@@ -74,7 +70,7 @@ class DisastersParent extends Component {
 
 	render() {
 		return (
-			<svg ref={node => this.node = node} 
+			<svg className="map_svg" ref={node => this.node = node} 
 				width={ '100%'} height={ '100%' }>
 		    </svg>
 		);
