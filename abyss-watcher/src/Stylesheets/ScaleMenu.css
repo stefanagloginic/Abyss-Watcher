@@ -1,0 +1,34 @@
+.bm-burger-button {
+	position: fixed;
+	width: 36px;
+	height: 30px;
+	top: 2.5em;
+	left: 2.5em;
+}
+
+.right .bm-burger-button {
+	left: initial;
+	right: 36px;
+}
+
+.bm-burger-bars {
+	background: #373a47;
+}
+
+.bm-morph-shape {
+	fill: #373a47;
+}
+
+
+
+/*Change the color of the Menu*/
+.bm-menu {
+	background: #fff;
+}
+
+.open-menu-fab {
+	z-index: 1000;
+	position: fixed;
+	top: 2.5em;
+	left: 2.5em;
+}
