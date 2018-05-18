@@ -15,7 +15,6 @@ class App extends Component {
 					{menuConfig.items}
 				</ScaleMenu>
 				<div className="main-content" id="page-wrap">
-					<p>Hello Abyss Watcher!</p>
 					<DisastersParent />
 				</div>
 			</div>
