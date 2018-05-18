@@ -21,6 +21,6 @@ export default {
 		<a key="2" href=""><FaInbox size={21} /><span>Messages</span></a>,
 		<a key="3" href=""><FaCommentO size={21} /><span>Comments</span></a>,
 		<a key="4" href=""><FaCogs size={21} /><span>Settings</span></a>,
-		<a key="5" href="https://github.com/stefanagloginic/Abyss-Watcher" styles={style}><FaGithubSquare size={20} /><span>Github</span></a>
+		<a key="5" href="https://github.com/stefanagloginic/Abyss-Watcher"><FaGithubSquare size={20} /><span>Github</span></a>
 	]
 }
