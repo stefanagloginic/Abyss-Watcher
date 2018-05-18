@@ -8,6 +8,11 @@ import FaCogs from 'react-icons/lib/fa/cogs'
 import FaInbox from 'react-icons/lib/fa/inbox'
 import WatcherLogo from '../img/WatcherLogo.svg'
 
+var style = {
+	display: 'flex',
+	'align-items': 'center',
+}
+
 export default {
 	items: [
 		<h2 className="menu-logo" key="0"><img src={WatcherLogo}/><h2>Abyss Watcher</h2></h2>,
