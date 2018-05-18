@@ -18,7 +18,7 @@ class MenuWrapper extends Component {
 				<Menu 
 					{...this.props}
 					isOpen={ this.state.isOpen }
-			  		width={ '21em' }
+			  		width={ '21rem' }
 					>
 					{this.props.children}
 				</Menu>
