@@ -3,7 +3,6 @@ import { scaleDown as Menu } from 'react-burger-menu';
 import FaBeer from 'react-icons/lib/fa/beer';
 import '../Stylesheets/ScaleMenu.css';
 
-
 class MenuWrapper extends Component {
 	constructor (props) {
 		super(props);
@@ -19,7 +18,7 @@ class MenuWrapper extends Component {
 				<Menu 
 					{...this.props}
 					isOpen={ this.state.isOpen }
-			  		width={ '25em' }
+			  		width={ '21em' }
 					>
 					{this.props.children}
 				</Menu>
