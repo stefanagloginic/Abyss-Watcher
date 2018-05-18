@@ -4,11 +4,15 @@
   "private": true,
   "dependencies": {
     "ndjson-cli": "^0.3.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
     "react-scripts": "1.1.4",
     "topojson-client": "^3.0.0",
-    "topojson-simplify": "^3.0.2"
+    "topojson-simplify": "^3.0.2",
+    "react": "^16.3.0",
+    "react-burger-menu": "^2.4.4",
+    "react-dom": "^16.3.0",
+    "react-icons": "^2.2.7",
+    "react-scripts": "1.1.4",
+    "react-svg-buttons": "^0.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

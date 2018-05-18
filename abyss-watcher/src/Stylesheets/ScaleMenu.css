@@ -1,0 +1,88 @@
+.bm-burger-button {
+	position: fixed;
+	width: 36px;
+	height: 30px;
+	top: 2.5em;
+	left: 2.5em;
+}
+
+.right .bm-burger-button {
+	left: initial;
+	right: 36px;
+}
+
+.bm-burger-bars {
+	background: #373a47;
+}
+
+.bm-morph-shape {
+	fill: #373a47;
+}
+
+.bm-cross {
+	background: #999;
+}
+
+.bm-cross-button {
+	height: 24px;
+	width: 24px;
+}
+
+.bm-menu {
+	padding: 3.4em 1em 0;
+}
+
+
+
+/*Change the color of the Menu*/
+.bm-menu {
+	background: #fff;
+	padding: 0;
+}
+
+.open-menu-fab {
+	z-index: 1000;
+	position: fixed;
+	top: 2.5em;
+	left: 2.5em;
+}
+
+.bm-cross {
+	background: #888;
+}
+
+
+.menu-logo > img {
+	width: 10rem;
+    margin-top: 1.5rem;
+}
+
+.menu-logo > h2 {
+	font-weight: 300;
+    font-size: 1.6em;
+    border-bottom: 1px #262525 solid;
+    padding-bottom: 0.3rem;
+}
+
+a {
+	padding: 1rem;
+	text-transform: uppercase;
+	transition: background 0.3s, box-shadow 0.3s;
+	color: #262525;
+  	text-decoration: none;
+  	text-align: start;
+  	border-bottom: 1px #262525 solid;
+}
+
+a:hover,
+a:focus {
+	background: rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
+	color: #e52b50;
+}
+
+a > span {
+	font-weight: 300;
+	font-size: 1.1rem;
+	margin-left: 0.2rem;
+}
