@@ -67,8 +67,9 @@ class DisastersParent extends Component {
 					.attr('fill', 'white')
 					.style('font-size', function(){
 						if(d.properties && d.properties.postal){
-							// console.log(geoPath.area(d)/(38*d.properties.postal.length) + "px");
-							return geoPath.area(d)/( 38 * d.properties.postal.length);
+							// console.log(geoPath.area(d)/(55*d.properties.postal.length) + "px");
+							var estFontSize = geoPath.area(d)/( 55 * d.properties.postal.length);
+							return estFontSize <= 3 ? "4px" : estFontSize + "px"
 						}
 					})
 					.attr("class", d.properties.postal);
@@ -81,8 +82,8 @@ class DisastersParent extends Component {
 				state_names_g.select("." + d.properties.postal).remove();
 
 				d3.select(this)
-						.attr( "fill", "#00517a" )
-						.style("cursor", "default"); 
+					.attr( "fill", "#00517a" )
+					.style("cursor", "default"); 
 			})
 		    .attr( "fill", "#00517a" )
 		    .attr( "stroke", "#7db4d1")
