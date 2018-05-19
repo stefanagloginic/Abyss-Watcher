@@ -69,7 +69,7 @@ class DisastersParent extends Component {
 						if(d.properties && d.properties.postal){
 							// console.log(geoPath.area(d)/(55*d.properties.postal.length) + "px");
 							var estFontSize = geoPath.area(d)/( 55 * d.properties.postal.length);
-							return estFontSize <= 3 ? "4px" : estFontSize + "px"
+							return estFontSize <= 1 ? "2px" : estFontSize + "px"
 						}
 					})
 					.attr("class", d.properties.postal);
