@@ -6,7 +6,7 @@ import FaBellO from 'react-icons/lib/fa/bell-o'
 import FaCommentO from 'react-icons/lib/fa/comment-o'
 import FaCogs from 'react-icons/lib/fa/cogs'
 import FaInbox from 'react-icons/lib/fa/inbox'
-import WatcherLogo from '../img/WatcherLogo.svg'
+import WatcherLogo from '../img/WatcherLogo.js'
 
 var style = {
 	display: 'flex',
@@ -15,7 +15,7 @@ var style = {
 
 export default {
 	items: [
-		<h2 className="menu-logo" key="0"><img src={WatcherLogo}/><h2>Abyss Watcher</h2></h2>,
+		<div className="menu-logo" key="0"><div className="logo-wrapper">{WatcherLogo}<h2>Abyss Watcher</h2></div></div>,
 		<a key="0" href=""><FaStarO size={21} /><span>Favorites</span></a>,
 		<a key="1" href=""><FaBellO size={21} /><span>Alerts</span></a>,
 		<a key="2" href=""><FaInbox size={21} /><span>Messages</span></a>,
