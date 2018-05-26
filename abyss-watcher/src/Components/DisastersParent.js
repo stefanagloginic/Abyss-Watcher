@@ -7,6 +7,7 @@ import { select } from 'd3-selection'
 import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
+import earthquake_data from '../data/earthquake_dataset'
 
 class DisastersParent extends Component {
 	constructor(props){
@@ -103,6 +104,32 @@ class DisastersParent extends Component {
 		state_names_g.append("g")
 			.attr("class", "us_states_names");
 
+	var earthquakes = select(node)
+		.append( "g" )
+		.attr("class", "earthquake_paths");
+
+
+	// console.log(earthquake_data.earthquake_json.features)
+	var CreateYearFilter = (start, end) => {
+		return (date) =>{
+			let year = (new Date(date)).getFullYear();
+			return (year >= start && year <= end)
+		}
+	};
+
+	var yearFilter = CreateYearFilter(2016, 2016);
+	var earthquake_features = earthquake_data.earthquake_json.features.filter(function(obj) {
+		return yearFilter(obj.properties.Date);
+	})
+
+	earthquakes.selectAll( "path" )
+		.data( earthquake_features )
+		.enter()
+		.append( "path" )
+		.attr( "fill", "#900" )
+		.attr( "stroke", "#999" )
+		.attr( "d", geoPath );
+
 		// zoom capability
 		var zoom = d3.zoom()
 		    .scaleExtent([1, 20])
@@ -117,7 +144,7 @@ class DisastersParent extends Component {
     	var node = this.node;
 
 		select(node)
-	    	.select('g')
+	    	.selectAll('g')
 		 	.style("stroke-width", 1.5 / d3.event.transform.k + "px")
 		  	.attr("transform", d3.event.transform); 
 	}
