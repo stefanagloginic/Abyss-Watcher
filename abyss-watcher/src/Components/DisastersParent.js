@@ -117,7 +117,7 @@ class DisastersParent extends Component {
 			let year = (new Date(date)).getFullYear();
 			return (year >= start && year <= end)
 		}
-	};
+	}
 
 	var yearFilter = CreateYearFilter(2016, 2016);
 
