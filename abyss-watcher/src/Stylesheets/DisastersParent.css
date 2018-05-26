@@ -6,3 +6,9 @@
 .map_svg {
 	background-color: #003149;
 }
+
+.earthquake_points {
+	fill-opacity: .5;
+	stroke: #c10000;
+	fill: #a30000;
+}
