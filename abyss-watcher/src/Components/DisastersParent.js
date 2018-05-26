@@ -8,6 +8,7 @@ import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
 import earthquake_data from '../data/earthquake_dataset'
+import tsunami_data from '../data/tsunami_dataset'
 import d3Tip from 'd3-tip'
 
 class DisastersParent extends Component {
@@ -40,6 +41,8 @@ class DisastersParent extends Component {
 		var geoPath = d3.geoPath()
     		.projection( albersProjection );
     	// console.log(feature(usData, usData.objects.layer1).features);
+
+    	this.geoPath = geoPath;
 
     	// reference to the first group
     	var state_names_g = select(node)
@@ -105,76 +108,7 @@ class DisastersParent extends Component {
 		state_names_g.append("g")
 			.attr("class", "us_states_names");
 
-	// add static earthquake group
-	var earthquakes = select(node)
-		.append( "g" )
-		.attr("class", "earthquake_points");
-
-
-	// console.log(earthquake_data.earthquake_json.features)
-	var CreateYearFilter = (start, end) => {
-		return (date) =>{
-			let year = (new Date(date)).getFullYear();
-			return (year >= start && year <= end)
-		}
-	}
-
-	var yearFilter = CreateYearFilter(2016, 2016);
-
-	var earthquake_features = earthquake_data.earthquake_json.features.filter(function(obj) {
-		return yearFilter(obj.properties.Date);
-	}).sort(function(a, b) {
-		return b.properties.Magnitude - a.properties.Magnitude;
-	})
-
-	var radius = d3.scaleSqrt()
-	    .domain([5, 10])
-	    .range([0, 15]);
-
-	// setup tooltip
-	var tip = d3Tip()
-	  .attr('class', 'd3-tip')
-	  .offset([-10, 0])
-	  .html(function(d) {
-	    return "<div><strong style='font-size:12px;'>Date:</strong> <span style='color:red;font-size:12px'>" 
-	    	+ d.properties.Date + "</span></div>" +  
-	    	"<div><strong style='font-size:12px'>Time:</strong> <span style='color:red;font-size:12px'>" 
-	    	+ d.properties.Time + "</span></div>" +
-	    	"<div><strong style='font-size:12px'>Magnitude:</strong> <span style='color:red;font-size:12px'>" 
-	    	+ d.properties.Magnitude + "</span></div>" + 
-	    	"<div><strong style='font-size:12px'>Depth:</strong> <span style='color:red;font-size:12px'>" 
-	    	+ d.properties.Depth + "</span></div>";
-	  });
-
-	// add earthquake points
-	earthquakes.selectAll( "circle" )
-		.data( earthquake_features )
-		.enter()
-		.append( "circle" )
-		.attr("transform", function(d) { return "translate(" + geoPath.centroid(d) + ")"; })
-    	.attr("r", function(d){
-    		return radius(d.properties.Magnitude);
-    	})
-    	.on("mouseover", function(d) {
-    		d3.select(this)
-				.attr( "fill", "#ac4bb7" )
-				.attr("fill-opacity", "1")
-				.attr("stroke", "#f2cdf7")
-				.style("cursor", "pointer");
-			
-			tip.show(d, this);
-    	})
-    	.on("mouseleave", function(d) {
-    		d3.select(this)
-    			.attr( "stroke", "#c10000" )
-				.attr("fill-opacity", ".5")
-				.attr( "fill", "#a30000" )
-				.style("cursor", "default");
-			
-			tip.hide(d, this);
-    	})
-    	.attr("stroke-width", "0.2px")
-		.attr( "d", geoPath );
+		this.plotEarthquakePoints();
 
 		// zoom capability
 		var zoom = d3.zoom()
@@ -182,8 +116,87 @@ class DisastersParent extends Component {
 		    .on("zoom", this.zoomed);
 
 		select(node)
-			.call(zoom)
-			.call(tip);
+			.call(zoom);
+    }
+
+    plotEarthquakePoints = () => {
+	    // add static earthquake group
+	    const node = this.node;
+	    const geoPath = this.geoPath;
+
+		var earthquakes = select(node)
+			.append( "g" )
+			.attr("class", "earthquake_points");
+
+		// console.log(earthquake_data.earthquake_json.features)
+		var CreateYearFilter = (start, end) => {
+			return (date) =>{
+				let year = (new Date(date)).getFullYear();
+				return (year >= start && year <= end)
+			}
+		}
+
+		var yearFilter = CreateYearFilter(2016, 2016);
+
+		var earthquake_features = earthquake_data.earthquake_json.features.filter(function(obj) {
+			return yearFilter(obj.properties.Date);
+		}).sort(function(a, b) {
+			return b.properties.Magnitude - a.properties.Magnitude;
+		});
+
+		var radius = d3.scaleSqrt()
+		    .domain([5, 10])
+		    .range([0, 15]);
+
+		// setup tooltip
+		var tip = d3Tip()
+		  .attr('class', 'd3-tip')
+		  .offset([-10, 0])
+		  .html(function(d) {
+		    return "<div><strong style='font-size:12px;'>Date:</strong> <span style='color:red;font-size:12px'>" 
+		    	+ d.properties.Date + "</span></div>" +  
+		    	"<div><strong style='font-size:12px'>Time:</strong> <span style='color:red;font-size:12px'>" 
+		    	+ d.properties.Time + "</span></div>" +
+		    	"<div><strong style='font-size:12px'>Magnitude:</strong> <span style='color:red;font-size:12px'>" 
+		    	+ d.properties.Magnitude + "</span></div>" + 
+		    	"<div><strong style='font-size:12px'>Depth:</strong> <span style='color:red;font-size:12px'>" 
+		    	+ d.properties.Depth + "</span></div>";
+		  });
+
+		// add earthquake points
+		earthquakes.selectAll( "circle" )
+			.data( earthquake_features )
+			.enter()
+			.append( "circle" )
+			.attr("transform", function(d) { 
+				return "translate(" + geoPath.centroid(d) + ")"; 
+			})
+	    	.attr("r", function(d){
+	    		return radius(d.properties.Magnitude);
+	    	})
+	    	.on("mouseover", function(d) {
+	    		d3.select(this)
+					.attr( "fill", "#ac4bb7" )
+					.attr("fill-opacity", "1")
+					.attr("stroke", "#f2cdf7")
+					.style("cursor", "pointer");
+				
+				tip.show(d, this);
+	    	})
+	    	.on("mouseleave", function(d) {
+	    		d3.select(this)
+	    			.attr( "stroke", "#c10000" )
+					.attr("fill-opacity", ".5")
+					.attr( "fill", "#a30000" )
+					.style("cursor", "default");
+				
+				tip.hide(d, this);
+	    	})
+	    	.attr("stroke-width", "0.2px")
+			.attr( "d", geoPath );
+
+			select(node)
+				.call(tip);
     }
 
     zoomed = () => {
