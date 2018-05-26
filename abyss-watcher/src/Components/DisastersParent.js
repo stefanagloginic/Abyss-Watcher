@@ -106,7 +106,7 @@ class DisastersParent extends Component {
 
 	var earthquakes = select(node)
 		.append( "g" )
-		.attr("class", "earthquake_paths");
+		.attr("class", "earthquake_points");
 
 
 	// console.log(earthquake_data.earthquake_json.features)
@@ -118,16 +118,40 @@ class DisastersParent extends Component {
 	};
 
 	var yearFilter = CreateYearFilter(2016, 2016);
+
 	var earthquake_features = earthquake_data.earthquake_json.features.filter(function(obj) {
 		return yearFilter(obj.properties.Date);
+	}).sort(function(a, b) {
+		return b.properties.Magnitude - a.properties.Magnitude;
 	})
 
-	earthquakes.selectAll( "path" )
+	var radius = d3.scaleSqrt()
+	    .domain([5, 10])
+	    .range([0, 15]);
+
+	earthquakes.selectAll( "circle" )
 		.data( earthquake_features )
 		.enter()
-		.append( "path" )
-		.attr( "fill", "#900" )
-		.attr( "stroke", "#999" )
+		.append( "circle" )
+		.attr("transform", function(d) { return "translate(" + geoPath.centroid(d) + ")"; })
+    	.attr("r", function(d){
+    		return radius(d.properties.Magnitude);
+    	})
+    	.on("mouseover", function() {
+    		d3.select(this)
+				.attr( "fill", "#ac4bb7" )
+				.attr("fill-opacity", "1")
+				.attr("stroke", "#f2cdf7")
+				.style("cursor", "pointer");
+    	})
+    	.on("mouseleave", function() {
+    		d3.select(this)
+    			.attr( "stroke", "#c10000" )
+				.attr("fill-opacity", ".5")
+				.attr( "fill", "#a30000" )
+				.style("cursor", "default");
+    	})
+    	.attr("stroke-width", "0.2px")
 		.attr( "d", geoPath );
 
 		// zoom capability
@@ -138,7 +162,6 @@ class DisastersParent extends Component {
 		select(node)
 			.call(zoom);
     }
-
 
     zoomed = () => {
     	var node = this.node;
