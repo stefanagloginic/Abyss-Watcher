@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import DisastersMap from './DisastersMap'
+import DataCommunication from './DataCommunication'
 import worldData from 'world-atlas/world/110m.json'
 import usData from '../us-110m.json'
 import { geoMercator, geoAlbers, geoPath } from 'd3-geo'
@@ -274,8 +274,8 @@ class DisastersParent extends Component {
 	    	.attr("stroke-width", "0.2px")
 			.attr( "d", geoPath );
 
-			select(node)
-				.call(tip);
+		select(node)
+			.call(tip);
     }
 
     zoomed = () => {
