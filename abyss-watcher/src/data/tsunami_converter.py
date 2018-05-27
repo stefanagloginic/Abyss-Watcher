@@ -32,6 +32,7 @@ for obj in data:
 	properties_obj["Fatalities"] = obj["FATALITIES"]
 	properties_obj["Injuries"] = obj["INJURIES"]
 	properties_obj["First_motion"] = obj["FIRST_MOTION"]
+	properties_obj["Type"] = "Tsunami"
 
 	geometry_obj["type"] = "Point"
 	geometry_obj["coordinates"] = []
