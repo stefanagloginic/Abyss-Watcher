@@ -13,6 +13,12 @@
 	fill: #a30000;
 }
 
+.tsunami_points {
+  fill-opacity: .5;
+  stroke: #a0efff;
+  fill: #84ecff;
+}
+
 .d3-tip {
   line-height: 1;
   font-weight: bold;
