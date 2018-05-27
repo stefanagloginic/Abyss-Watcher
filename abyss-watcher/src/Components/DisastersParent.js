@@ -12,7 +12,6 @@ import tsunami_data from '../data/tsunami_dataset'
 import d3Tip from 'd3-tip'
 import wave_path from '../Icons/wave_path'
 
-
 class DisastersParent extends Component {
 	constructor(props){
 		super(props)
@@ -289,9 +288,12 @@ class DisastersParent extends Component {
 
 	render() {
 		return (
-			<svg className="map_svg" ref={node => this.node = node} 
-				width={ '100%'} height={ '100%' }>
-		    </svg>
+			<div className="map_wrapper">
+				<DataCommunication />
+				<svg className="map_svg" ref={node => this.node = node} 
+					width={ '100%'} height={ '100%' }>
+			    </svg>
+		    </div>
 		);
 	}
 }

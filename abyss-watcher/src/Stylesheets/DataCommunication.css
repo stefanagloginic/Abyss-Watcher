@@ -2,3 +2,54 @@
 	margin: 0;
 	padding: 0;
 }
+
+.comm_wrapper {
+	width: 20%;
+	height: 10%;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	/*background-color: rgba(0,0,0,0.3);*/
+	border-radius: 3px;
+	pointer-events: none;
+	padding: 10px;
+}
+
+.inner_comm {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.tsunami_circle {
+	fill: none;
+	stroke: #84ecff;
+}
+
+.earthquake_circle {
+  fill: none;
+  stroke: red;
+}
+
+.legend text {
+  fill: #cecece;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.earthquake_wrapper_div,  .tsunami_wrapper_div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.comm_quake_svg, .comm_tsunami_svg{
+	width: 55px;
+	height: 65px;
+}
+
+.earthquake_p, .p {
+	font-size: 12px;
+	width: 70px;
+	color: #cecece;
+}
