@@ -163,7 +163,7 @@ class DisastersParent extends Component {
 			    	"<div><strong style='font-size:12px'>Location:</strong> <span style='color:red;font-size:12px'>" 
 			    	+ location + "</span></div>" +
 			    	"<div><strong style='font-size:12px'>Height:</strong> <span style='color:red;font-size:12px'>" 
-			    	+ d.properties.Max_height + "</span></div>" + 
+			    	+ d.properties.Max_height + "m" + "</span></div>" + 
 			    	"<div><strong style='font-size:12px'>Wave Period:</strong> <span style='color:red;font-size:12px'>" 
 			    	+ period + "</span></div>";
 			});
@@ -239,7 +239,7 @@ class DisastersParent extends Component {
 			    	"<div><strong style='font-size:12px'>Magnitude:</strong> <span style='color:red;font-size:12px'>" 
 			    	+ d.properties.Magnitude + "</span></div>" + 
 			    	"<div><strong style='font-size:12px'>Depth:</strong> <span style='color:red;font-size:12px'>" 
-			    	+ d.properties.Depth + "</span></div>";
+			    	+ d.properties.Depth + "km" + "</span></div>";
 			});
 
 		// add earthquake points
