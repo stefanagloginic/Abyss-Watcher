@@ -110,7 +110,7 @@ class DataCommunication extends Component {
 
 		d3.select(".tsunami_wrapper_div")
 			.append("p")
-			.text("Tsunami (λ)")
+			.text("Tsunami")
 			.attr("class", "tsunami_p p")
 	}
 
