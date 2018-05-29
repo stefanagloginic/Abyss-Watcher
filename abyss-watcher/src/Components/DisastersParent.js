@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import DataCommunication from './DataCommunication'
+
+/*-----------------d3----------------------------*/
 import worldData from 'world-atlas/world/110m.json'
 import usData from '../us-110m.json'
 import { geoMercator, geoAlbers, geoPath } from 'd3-geo'
@@ -10,7 +12,9 @@ import '../Stylesheets/DisastersParent.css'
 import earthquake_data from '../data/earthquake_dataset'
 import tsunami_data from '../data/tsunami_dataset'
 import d3Tip from 'd3-tip'
-import wave_path from '../Icons/wave_path'
+
+/*----------------Redux---------------------*/
+import { connect } from 'react-redux';
 
 class DisastersParent extends Component {
 	constructor(props){
@@ -298,4 +302,11 @@ class DisastersParent extends Component {
 	}
 }
 
-export default DisastersParent
+const mapStateToProps = (state) => {
+	return {
+		championData: state.menuOptions
+	}
+}
+
+
+export default connect(mapStateToProps)(DisastersParent);
