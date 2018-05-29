@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { scaleDown as Menu } from 'react-burger-menu';
 import DisasterOption from './DisasterOption'
-import menuConfigs from '../configs/menuconfigs'
+import menuConfigs from '../Configs/menuconfigs'
 import '../Stylesheets/ScaleMenu.css';
 /*---------------redux------------------*/
 import { connect } from 'react-redux';

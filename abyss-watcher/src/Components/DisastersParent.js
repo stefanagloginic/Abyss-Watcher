@@ -12,7 +12,6 @@ import '../Stylesheets/DisastersParent.css'
 import earthquake_data from '../data/earthquake_dataset'
 import tsunami_data from '../data/tsunami_dataset'
 import d3Tip from 'd3-tip'
-import wave_path from '../icons/wave_path'
 
 /*----------------Redux---------------------*/
 import { connect } from 'react-redux';
