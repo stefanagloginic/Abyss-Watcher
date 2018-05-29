@@ -39,6 +39,8 @@ Go to [http://localhost:3000/](http://localhost:3000/) to view main page
 * D3.js *(for data visualization and map)*
 
 ## STATIC DATASETS USED 
-[Tsunami Data](https://www.kaggle.com/noaa/seismic-waves)
-[Earthquake Data](https://www.kaggle.com/usgs/earthquake-database/data)
-[Wildfire Data](https://catalog.data.gov/dataset/combined-wildfire-dataset-for-the-united-states-and-certain-territories-1870-2015)
+* [Tsunami Data](https://www.kaggle.com/noaa/seismic-waves)
+* [Earthquake Data](https://www.kaggle.com/usgs/earthquake-database/data)
+* [Wildfire Data](https://catalog.data.gov/dataset/combined-wildfire-dataset-for-the-united-states-and-certain-territories-1870-2015)
+* [Volcano Data with Impacts](https://www.kaggle.com/texasdave/volcano-eruptions/data)
+* [Historical Volcano Data](https://www.kaggle.com/smithsonian/volcanic-eruptions/data)
