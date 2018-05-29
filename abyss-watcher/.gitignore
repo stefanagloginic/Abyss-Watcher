@@ -23,3 +23,5 @@ yarn-error.log*
 
 data/earthquake_data.json
 data/tsunami.json
+data/volcano.json
+data/volcano_data_2010-2016.json
