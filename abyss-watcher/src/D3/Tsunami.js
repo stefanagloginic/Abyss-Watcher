@@ -6,6 +6,10 @@ import d3Tip from 'd3-tip'
 // expecting the svg node, the path to plot points along, visible boolean, 
 // and a filter function that will define what data points to display
 export default (node, geoPath, visible, filter) => {
+	if(!visible) {
+		return;
+	}
+	
 	var tsunamis = select(node)
 		.append("g")
 		.attr("class", "tsunami_points");

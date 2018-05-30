@@ -19,14 +19,35 @@ import { connect } from 'react-redux';
 class DisastersParent extends Component {
 	constructor(props){
 		super(props)
-		this.createMap = this.createMap.bind(this);
 	}
 
 	componentDidMount() {
     	this.createMap();
    	}
 
-	createMap() {
+   	componentDidUpdate() {
+		const { 
+			earthquake_options, 
+			tsunami_options,
+			tornado_options,
+			storm_options,
+			hurricane_options,
+			volcano_options
+		} = this.props.selectionData;
+
+		const node = this.node;
+		select(node).selectAll("g").remove();
+
+		this.earthquake_options = earthquake_options;
+		this.tsunami_options = tsunami_options;
+		this.tornado_options = tornado_options;
+		this.storm_options = storm_options;
+		this.volcano_options = volcano_options;
+
+		this.createMap();
+   	}
+
+	createMap = () => {
     	const node = this.node;
     	var width = window.innerWidth;
 		var height = window.innerHeight;
@@ -113,9 +134,12 @@ class DisastersParent extends Component {
 		state_names_g.append("g")
 			.attr("class", "us_states_names");
 
-		plotEarthquakePoints(node, geoPath, true, this.CreateYearFilter(2016, 2016));
+		var isEarthquakeVisible = this.earthquake_options ? this.earthquake_options.visible : false
+		var isTsunamiVisible = this.tsunami_options ? this.tsunami_options.visible : false
 
-		plotTsunamiPoints(node, geoPath, true, this.CreateYearFilter(2014, 2016));
+		plotEarthquakePoints(node, geoPath, isEarthquakeVisible, this.CreateYearFilter(2016, 2016));
+
+		plotTsunamiPoints(node, geoPath, isTsunamiVisible, this.CreateYearFilter(2014, 2016));
 		// zoom capability
 		var zoom = d3.zoom()
 		    .scaleExtent([1, 20])
@@ -145,9 +169,12 @@ class DisastersParent extends Component {
 		return (
 			<div className="map_wrapper">
 				<DataCommunication />
-				<svg className="map_svg" ref={node => this.node = node} 
-					width={ '100%'} height={ '100%' }>
-			    </svg>
+				<svg 
+					className="map_svg" 
+					ref={node => this.node = node} 
+					width={ '100%'} 
+					height={ '100%' } 
+				/>
 		    </div>
 		);
 	}
@@ -155,7 +182,7 @@ class DisastersParent extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		championData: state.menuOptions
+		selectionData: state.menuOptions
 	}
 }
 
