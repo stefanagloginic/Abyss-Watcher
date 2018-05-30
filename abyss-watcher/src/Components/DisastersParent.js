@@ -10,6 +10,7 @@ import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
 import d3Tip from 'd3-tip'
+import GraphIcon from '../Icons/graph'
 import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
 
@@ -169,6 +170,10 @@ class DisastersParent extends Component {
 		return (
 			<div className="map_wrapper">
 				<DataCommunication />
+				<div className="graph_icon_wrapper">
+					<GraphIcon className="graph_icon" size={65} />
+					<p>Graphs</p>
+				</div>
 				<svg 
 					className="map_svg" 
 					ref={node => this.node = node} 
