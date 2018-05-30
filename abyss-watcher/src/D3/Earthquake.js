@@ -6,6 +6,10 @@ import earthquake_data from '../data/earthquake_dataset'
 // expecting the svg node, the path to plot points along, visible boolean, 
 // and a filter function that will define what data points to display
 export default (node, geoPath, visible, filter) => {
+	if(!visible) {
+		return;
+	}
+	
 	var earthquakes = select(node)
 		.append( "g" )
 		.attr("class", "earthquake_points");
