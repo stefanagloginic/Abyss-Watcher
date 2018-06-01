@@ -22,6 +22,8 @@ export default function (state = {}, action) {
             return {...state, hurricane_options: payload};
         case 'SET_STORM_OPTIONS':
             return {...state, storm_options: payload};
+        case 'SET_YEAR':
+            return {...state, year: payload };
         default:
             break;
     }
