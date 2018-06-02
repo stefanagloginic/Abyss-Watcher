@@ -24,6 +24,12 @@
   fill: #84ecff;
 }
 
+.volcano_points {
+  fill-opacity: .5;
+  stroke: #fdffba;
+  fill: #faff72;
+}
+
 .d3-tip {
   line-height: 1;
   font-weight: bold;

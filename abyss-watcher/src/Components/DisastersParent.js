@@ -13,6 +13,7 @@ import d3Tip from 'd3-tip'
 import GraphIcon from '../Icons/graph'
 import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
+import plotVolcanoPoints from '../D3/Volcano'
 
 /*----------------Redux---------------------*/
 import { connect } from 'react-redux';
@@ -134,6 +135,8 @@ class DisastersParent extends Component {
 		plotEarthquakePoints(node, geoPath, earthquake_options.visible, this.CreateYearFilter(year, year));
 
 		plotTsunamiPoints(node, geoPath, tsunami_options.visible, this.CreateYearFilter(year, year));
+
+		plotVolcanoPoints(node, geoPath, volcano_options.visible, this.CreateYearFilter(year, year));
 		// zoom capability
 		var zoom = d3.zoom()
 		    .scaleExtent([1, 20])
