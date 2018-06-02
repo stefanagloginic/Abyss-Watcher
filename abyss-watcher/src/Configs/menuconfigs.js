@@ -13,32 +13,38 @@ export default {
 		{
 			name: 'Earthquakes',
 			icon: <Crack size={21} />,
-			href: ''
+			href: '',
+			checked: true,
 		},
 		{
 			name: 'Tsunamis',
 			icon: <Tsunami size={21} />,
-			href: ''
+			href: '',
+			checked: false,
 		},
 		{
 			name: 'Tornadoes',
 			icon: <Tornado size={21} />,
-			href: ''
+			href: '',
+			checked: false,
 		},
 		{
 			name: 'Volcanoes',
 			icon: <Volcano size={21} />,
-			href:''
+			href:'',
+			checked: false,
 		},
 		{
 			name: 'Hurricanes',
 			icon: <Hurricane size={21} />,
-			href: ''
+			href: '',
+			checked: false,
 		},
 		{
 			name: 'Storms',
 			icon:<Storm size={21} />,
-			href: ''
+			href: '',
+			checked: false,
 		},
 	]
 }
