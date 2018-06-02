@@ -1,0 +1,21 @@
+.slider-wrapper {
+  width: 25rem;
+  position: fixed;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.slider-content {
+  width: 23rem;
+}
+
+.value-display {
+	font-weight: 300;
+	font-size: 1.2rem;
+	margin-top: 0.2rem;
+	color: #cecece;
+}
