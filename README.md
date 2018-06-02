@@ -26,7 +26,7 @@ Go to [http://localhost:3000/](http://localhost:3000/) to view main page
 ## CURRENT DISASTER TYPES
 * Earthquake *(scaled points according to magnitude)*
 * Tsunami *(scaled points according to wave height)*
-* Volcanic Acivity
+* Volcanic Activity *(scaled points according to eruption elevation)
 * Hurricane
 * Tornado
 * Wildfire *(found in the USA)*
@@ -42,5 +42,4 @@ Go to [http://localhost:3000/](http://localhost:3000/) to view main page
 * [Tsunami Data](https://www.kaggle.com/noaa/seismic-waves)
 * [Earthquake Data](https://www.kaggle.com/usgs/earthquake-database/data)
 * [Wildfire Data](https://catalog.data.gov/dataset/combined-wildfire-dataset-for-the-united-states-and-certain-territories-1870-2015)
-* [Volcano Data with Impacts](https://www.kaggle.com/texasdave/volcano-eruptions/data)
-* [Historical Volcano Data](https://www.kaggle.com/smithsonian/volcanic-eruptions/data)
+* [Volcano Data with Impacts](https://www.ngdc.noaa.gov/)
