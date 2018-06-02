@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DataCommunication from './DataCommunication'
-
+import YearSlider from './YearSlider';
 /*-----------------d3----------------------------*/
 import worldData from 'world-atlas/world/110m.json'
 import usData from '../us-110m.json'
@@ -16,35 +16,20 @@ import plotEarthquakePoints from '../D3/Earthquake'
 
 /*----------------Redux---------------------*/
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+/*----------------Actions------------------*/
+import { setYear } from '../actions/MenuActions'
 
 class DisastersParent extends Component {
 	constructor(props){
 		super(props)
 	}
 
-	componentDidMount() {
-    	this.createMap();
-   	}
+	componentDidMount(){
+		this.createMap();
+	}
 
    	componentDidUpdate() {
-		const { 
-			earthquake_options, 
-			tsunami_options,
-			tornado_options,
-			storm_options,
-			hurricane_options,
-			volcano_options
-		} = this.props.selectionData;
-
-		const node = this.node;
-		select(node).selectAll("g").remove();
-
-		this.earthquake_options = earthquake_options;
-		this.tsunami_options = tsunami_options;
-		this.tornado_options = tornado_options;
-		this.storm_options = storm_options;
-		this.volcano_options = volcano_options;
-
 		this.createMap();
    	}
 
@@ -52,6 +37,17 @@ class DisastersParent extends Component {
     	const node = this.node;
     	var width = window.innerWidth;
 		var height = window.innerHeight;
+		const { 
+			earthquake_options, 
+			tsunami_options,
+			tornado_options,
+			storm_options,
+			hurricane_options,
+			volcano_options,
+			year
+		} = this.props.selectionData;
+
+		select(node).selectAll("g").remove();
 
 		// append first group to the svg
     	select(node)
@@ -135,12 +131,9 @@ class DisastersParent extends Component {
 		state_names_g.append("g")
 			.attr("class", "us_states_names");
 
-		var isEarthquakeVisible = this.earthquake_options ? this.earthquake_options.visible : false
-		var isTsunamiVisible = this.tsunami_options ? this.tsunami_options.visible : false
+		plotEarthquakePoints(node, geoPath, earthquake_options.visible, this.CreateYearFilter(year, year));
 
-		plotEarthquakePoints(node, geoPath, isEarthquakeVisible, this.CreateYearFilter(2016, 2016));
-
-		plotTsunamiPoints(node, geoPath, isTsunamiVisible, this.CreateYearFilter(2014, 2016));
+		plotTsunamiPoints(node, geoPath, tsunami_options.visible, this.CreateYearFilter(year, year));
 		// zoom capability
 		var zoom = d3.zoom()
 		    .scaleExtent([1, 20])
@@ -167,6 +160,8 @@ class DisastersParent extends Component {
 	}
 
 	render() {
+		const { year } = this.props.selectionData
+
 		return (
 			<div className="map_wrapper">
 				<DataCommunication />
@@ -180,10 +175,16 @@ class DisastersParent extends Component {
 					width={ '100%'} 
 					height={ '100%' } 
 				/>
+				<YearSlider
+					defaultValue={ year }
+					onChange={ this.props.setYear }
+				/>
 		    </div>
 		);
 	}
 }
+
+
 
 const mapStateToProps = (state) => {
 	return {
@@ -191,5 +192,10 @@ const mapStateToProps = (state) => {
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		setYear: setYear, 
+	}, dispatch);
+}
 
-export default connect(mapStateToProps)(DisastersParent);
+export default connect(mapStateToProps, mapDispatchToProps)(DisastersParent);

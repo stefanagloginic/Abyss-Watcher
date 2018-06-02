@@ -24,8 +24,9 @@ class DisasterOption extends Component {
 				<input 
 					type="checkbox" 
 					onChange={this.handleCheck} 
-					defaultChecked={false}
-					ref="checkBox"/>
+					checked={this.props.checked}
+					ref="checkBox"
+				/>
 			</div>
 		);
 	}

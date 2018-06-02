@@ -9,6 +9,9 @@ import {bindActionCreators} from 'redux';
 /*---------------actions------------------*/
 import * as  MenuActions from '../actions/MenuActions';
 
+/*--------------utils---------------------*/
+import _ from 'lodash';
+
 class ScaleMenu extends Component {
 	constructor (props) {
 		super(props);
@@ -43,10 +46,20 @@ class ScaleMenu extends Component {
 
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		this.state = prevState;
+	}
+
 	get DisasterOptions() {
 		let menuOptions = menuConfigs.options
 			.map((item, idx) => {
-				return <DisasterOption{...item} key={idx} onChange={this.onOptionChange} />;
+				var defaultOptions = _.find(this.props.menuOptions, ['type', item.name.toUpperCase()]);
+				return <DisasterOption
+							{...item} 
+							checked={defaultOptions.visible}
+							key={idx} 
+							onChange={this.onOptionChange} 
+						/>;
 			});
 		
 		return (
@@ -57,6 +70,10 @@ class ScaleMenu extends Component {
 		)
 	}
 
+	isMenuOpen = (state) => {
+		this.setState({isOpen: state.isOpen});
+	}
+
 	render() {
 		return(
 			<div>
@@ -64,6 +81,7 @@ class ScaleMenu extends Component {
 				<Menu 
 					{...this.props}
 					isOpen={ this.state.isOpen }
+					onStateChange={ this.isMenuOpen }
 			  		width={ '21rem' }
 					>
 					{this.DisasterOptions}
@@ -78,4 +96,10 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(MenuActions, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(ScaleMenu);
+const mapStateToProps = (state) => {
+	return {
+		menuOptions: state.menuOptions
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScaleMenu);

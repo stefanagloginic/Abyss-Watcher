@@ -52,3 +52,12 @@ export const setStormOptions = (options) => {
     	});
   	}
 }
+
+export const setYear = (year) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_YEAR',
+      payload: year,
+    });
+  }
+}
