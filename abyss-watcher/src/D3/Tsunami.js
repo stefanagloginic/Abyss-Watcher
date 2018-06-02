@@ -16,7 +16,7 @@ export default (node, geoPath, visible, filter) => {
 
 
 	var tsunami_features = tsunami_data.tsunami_json.features.filter(function(obj) {
-		return filter('1/1/' + obj.properties.Year);
+		return filter('1/1/' + obj.properties.Year) && obj.properties.Latitude.length != 0;
 	}).sort(function(a, b) {
 		return b.properties.Max_height - a.properties.Max_height;
 	});
