@@ -29,7 +29,7 @@ export default (node, geoPath, visible, filter) => {
 		.attr('class', 'd3-tip-earthquake d3-tip')
 		.offset([-10, 0])
 		.html(function(d) {
-		    return "<div style='text-align:center;'><strong style='font-size:15px;color:#f93f2c;'>" 
+		    return "<div style='text-align:center;'><strong style='font-size:15px;color:red;'>" 
 		    	+ d.properties.Type + "</strong></div>" +
 		    	"<div><strong style='font-size:12px;'>Date:</strong> <span style='color:red;font-size:12px'>" 
 		    	+ d.properties.Date + "</span></div>" +  

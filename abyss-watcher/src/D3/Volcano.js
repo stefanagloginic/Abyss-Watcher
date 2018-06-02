@@ -33,15 +33,15 @@ export default (node, geoPath, visible, filter) => {
 			var date = d.properties.Month + "/" + d.properties.Day + "/" + d.properties.Year;
 		    return "<div style='text-align:center;'><strong style='font-size:15px;color:#faff72;'>" 
 		    	+ d.properties.Type + "</strong></div>" +
-		    	"<div><strong style='font-size:12px;'>Date:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px;'>Date:</strong> <span style='color:#faff72;font-size:12px'>" 
 		    	+ date + "</span></div>" +  
-		    	"<div><strong style='font-size:12px'>Name:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px'>Name:</strong> <span style='color:#faff72;font-size:12px'>" 
 		    	+ d.properties.Name + "</span></div>" +
-		    	"<div><strong style='font-size:12px'>Elevation:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px'>Elevation:</strong> <span style='color:#faff72;font-size:12px'>" 
 		    	+ d.properties.Elevation + "</span></div>" + 
-		    	"<div><strong style='font-size:12px'>Location:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px'>Location:</strong> <span style='color:#faff72;font-size:12px'>" 
 		    	+ d.properties.Location + "</span></div>" + 
-		    	"<div><strong style='font-size:12px'>Volcano Type:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px'>Volcano Type:</strong> <span style='color:#faff72;font-size:12px'>" 
 		    	+ d.properties.Volcano_Type + "</span></div>";
 		});
 

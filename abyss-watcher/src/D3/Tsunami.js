@@ -34,13 +34,13 @@ export default (node, geoPath, visible, filter) => {
 			var date = d.properties.Month + "/" + d.properties.Day + "/" + d.properties.Year;
 		    return "<div style='text-align:center;'><strong style='font-size:15px;color:#84ecff;'>" 
 		    	+ d.properties.Type + "</strong></div>" + 
-		    	"<div><strong style='font-size:12px;'>Date:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px;'>Date:</strong> <span style='color:#84ecff;font-size:12px'>" 
 		    	+ date + "</span></div>" +  
-		    	"<div><strong style='font-size:12px'>Location:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px'>Location:</strong> <span style='color:#84ecff;font-size:12px'>" 
 		    	+ location + "</span></div>" +
-		    	"<div><strong style='font-size:12px'>Height:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px'>Height:</strong> <span style='color:#84ecff;font-size:12px'>" 
 		    	+ d.properties.Max_height + "m" + "</span></div>" + 
-		    	"<div><strong style='font-size:12px'>Wave Period:</strong> <span style='color:red;font-size:12px'>" 
+		    	"<div><strong style='font-size:12px'>Wave Period:</strong> <span style='color:#84ecff;font-size:12px'>" 
 		    	+ period + "</span></div>";
 		});
 
