@@ -1,5 +1,6 @@
 .button_wrapper {
   position: fixed;
+  z-index: 100;
   bottom: 10px;
   left: 20px;
   display: flex;
