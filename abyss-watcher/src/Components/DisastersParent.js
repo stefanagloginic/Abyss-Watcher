@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import DataCommunication from './DataCommunication'
-import YearSlider from './YearSlider';
 /*-----------------d3----------------------------*/
 import worldData from 'world-atlas/world/110m.json'
 import usData from '../us-110m.json'
@@ -10,16 +9,17 @@ import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
 import d3Tip from 'd3-tip'
-import GraphIcon from '../Icons/graph'
+import IconButton from './IconButton'
 import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
 import plotVolcanoPoints from '../D3/Volcano'
 
+import GraphIcon from '../Icons/graph'
+
 /*----------------Redux---------------------*/
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-/*----------------Actions------------------*/
-import { setYear } from '../actions/MenuActions'
+
+import { Link } from 'react-router-dom'
 
 class DisastersParent extends Component {
 	constructor(props){
@@ -163,31 +163,20 @@ class DisastersParent extends Component {
 	}
 
 	render() {
-		const { year } = this.props.selectionData
-
 		return (
 			<div className="map_wrapper">
 				<DataCommunication />
-				<div className="graph_icon_wrapper">
-					<GraphIcon className="graph_icon" size={65} />
-					<p>Graphs</p>
-				</div>
+				<IconButton link="/graphs" label="Graphs" icon={<GraphIcon size={65} />} />
 				<svg 
 					className="map_svg" 
 					ref={node => this.node = node} 
 					width={ '100%'} 
 					height={ '100%' } 
 				/>
-				<YearSlider
-					defaultValue={ year }
-					onChange={ this.props.setYear }
-				/>
 		    </div>
 		);
 	}
 }
-
-
 
 const mapStateToProps = (state) => {
 	return {
@@ -195,10 +184,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators({
-		setYear: setYear, 
-	}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DisastersParent);
+export default connect(mapStateToProps)(DisastersParent);
