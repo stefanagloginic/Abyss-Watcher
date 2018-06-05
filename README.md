@@ -44,8 +44,6 @@ Go to [http://localhost:3000/](http://localhost:3000/) to view main page
 * [Wildfire Data](https://catalog.data.gov/dataset/combined-wildfire-dataset-for-the-united-states-and-certain-territories-1870-2015)
 * [Volcano Data with Impacts](https://www.ngdc.noaa.gov/)
 
-<<<<<<< HEAD
-=======
 ## IMAGES OF PROJECT
 >>>>>>> master
 ![Main Screen](main_screen.png)
