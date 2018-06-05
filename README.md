@@ -43,3 +43,7 @@ Go to [http://localhost:3000/](http://localhost:3000/) to view main page
 * [Earthquake Data](https://www.kaggle.com/usgs/earthquake-database/data)
 * [Wildfire Data](https://catalog.data.gov/dataset/combined-wildfire-dataset-for-the-united-states-and-certain-territories-1870-2015)
 * [Volcano Data with Impacts](https://www.ngdc.noaa.gov/)
+
+![Main Screen](main_screen.png)
+![Details Screen](details_screen.png)
+![Menu Screen](menu_screen.png)

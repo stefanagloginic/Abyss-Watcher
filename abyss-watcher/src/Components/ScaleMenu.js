@@ -11,6 +11,7 @@ import * as  MenuActions from '../actions/MenuActions';
 
 /*--------------utils---------------------*/
 import _ from 'lodash';
+import { Link } from 'react-router-dom'
 
 class ScaleMenu extends Component {
 	constructor (props) {
@@ -65,6 +66,7 @@ class ScaleMenu extends Component {
 		return (
 			<div>
 				{menuConfigs.header}
+				{menuConfigs.links}
 				{menuOptions}
 			</div>
 		)
