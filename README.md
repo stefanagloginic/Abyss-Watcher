@@ -46,4 +46,5 @@ Go to [http://localhost:3000/](http://localhost:3000/) to view main page
 
 ## IMAGES OF PROJECT
 ![Main Screen](main_screen.png)
+![Details Screen](details_screen.png)
 ![Menu Screen](menu_screen.png)
