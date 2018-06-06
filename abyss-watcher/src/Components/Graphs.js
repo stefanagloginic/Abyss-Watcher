@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import IconButton from './IconButton'
-import GlobeIcon from '../Icons/globe'
+import WorldMap from '../Icons/worldMap'
 import '../Stylesheets/Graphs.css'
 
 class Graphs extends Component {
@@ -8,7 +8,7 @@ class Graphs extends Component {
 		return(
 			<div className="graphs_wrapper">
 				<p>Hello Graphs!</p>
-				<IconButton link="/" label="Maps" icon={<GlobeIcon size={65} />} />
+				<IconButton link="/" label="Maps" icon={<WorldMap size={65} />} />
 			</div>
 		)
 	}

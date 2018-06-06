@@ -9,12 +9,13 @@ import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
 import d3Tip from 'd3-tip'
-import IconButton from './IconButton'
 import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
 import plotVolcanoPoints from '../D3/Volcano'
 
+/*----------------Components---------------------*/
 import GraphIcon from '../Icons/graph'
+import IconButton from './IconButton'
 
 /*----------------Redux---------------------*/
 import { connect } from 'react-redux';
