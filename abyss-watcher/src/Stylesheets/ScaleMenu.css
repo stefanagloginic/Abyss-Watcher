@@ -101,7 +101,6 @@ a {
 	transition: background 0.3s, box-shadow 0.3s;
 	color: #7db4d1;
   	text-align: start;
-  	box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
   	display: flex;
   	align-items: center;
   	cursor:pointer;

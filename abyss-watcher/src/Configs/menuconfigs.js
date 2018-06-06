@@ -17,13 +17,13 @@ export default {
 	links: <div className="links-wrapper">
 			<Link to={{ pathname: '/' }}>
 				<div className="link">
-					<WorldMap size={30} />
+					<WorldMap size={21} />
 					<span className="link-span">MAPS</span>
 				</div>
 			</Link>
 			<Link to={{ pathname: '/graphs' }}>
 				<div className="link bottom-link">
-					<MenuGraph size={30} />
+					<MenuGraph size={21} />
 					<span className="link-span">GRAPHS</span>
 				</div>
 			</Link>
