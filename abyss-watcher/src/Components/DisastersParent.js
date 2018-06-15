@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DataCommunication from './DataCommunication'
 /*-----------------d3----------------------------*/
 import worldData from 'world-atlas/world/110m.json'
+import worldNames from '../world-110m-country-names.json'
 import usData from '../us-110m.json'
 import { geoMercator, geoAlbers, geoPath } from 'd3-geo'
 import { select } from 'd3-selection'
@@ -72,6 +73,10 @@ class DisastersParent extends Component {
     	// reference to the first group
     	var state_names_g = select(node)
 			.select("g");
+			
+		// country names
+		var country_names_g = select(node)
+			.select("g");
 
 		// setup paths, styling & event listeners for map
     	select(node)
@@ -116,10 +121,43 @@ class DisastersParent extends Component {
 					d3.select(this)
 						.attr( "fill", "#d67f22" )
 						.style("cursor", "pointer"); 
+						
+				country_names_g.append("svg:text")
+					.text(d.name)
+					.attr("pointer-events", "none")
+					.style("font-size", "3px")
+					.attr("x", function(){
+						return geoPath.centroid(d)[0];
+					})
+					.attr("y", geoPath.centroid(d)[1])
+					.attr("text-anchor","middle")
+					.attr('fill', 'white')
+					.style('font-size', function(){
+						if(d.id && d.name){
+							//console.log(geoPath.area(d)/(80*d.properties.postal.length) + "px");
+							var estFontSize = geoPath.area(d)/( 80 * d.name.length);
+							if(estFontSize <= 1){
+								estFontSize = "2px";
+							}
+							else if(estFontSize > 30){
+								estFontSize = '20px';
+							}else{
+								estFontSize += 'px';
+							}
+
+							return estFontSize;
+						}
+					})
+					.attr("class", d.name);
+
+					d3.select(this)
+						.attr( "fill", "#d67f22" )
+						.style("cursor", "pointer"); 
 			})
 			.on("mouseleave",function (d){
 				state_names_g.select("." + d.properties.postal).remove();
-
+				country_names_g.select("." + d.name).remove();
+				
 				d3.select(this)
 					.attr( "fill", "#00517a" )
 					.style("cursor", "default"); 
@@ -132,6 +170,9 @@ class DisastersParent extends Component {
 		// append the second group to the DOM
 		state_names_g.append("g")
 			.attr("class", "us_states_names");
+			
+		country_names_g.append("g")
+			.attr("class", "world_country_names");
 
 		plotEarthquakePoints(node, geoPath, earthquake_options.visible, this.CreateYearFilter(year, year));
 
