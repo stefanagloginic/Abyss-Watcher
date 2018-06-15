@@ -75,7 +75,7 @@ class DisastersParent extends Component {
 			.select("g");
 			
 		// country names
-		var country_names_g = select(node)
+	var country_names_g = select(node)
 			.select("g");
 
 		// setup paths, styling & event listeners for map
