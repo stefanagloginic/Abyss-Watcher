@@ -85,6 +85,7 @@ class DisastersParent extends Component {
 		    .data([
 	    		...feature(worldData, worldData.objects.countries).features,
 	    		...feature(usData, usData.objects.layer1).features,
+			...feature(worldNames, worldNames.name).features,
 	    		])
 		    .enter()
 		    .append( "path" )
