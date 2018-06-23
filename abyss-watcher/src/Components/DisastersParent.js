@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DataCommunication from './DataCommunication'
 /*-----------------d3----------------------------*/
 import worldData from 'world-atlas/world/110m.json'
+import worldNames from '../world-110m-country-names'
 import usData from '../us-110m.json'
 import { geoMercator, geoAlbers, geoPath } from 'd3-geo'
 import { select } from 'd3-selection'
@@ -28,6 +29,8 @@ class DisastersParent extends Component {
 	}
 
 	componentDidMount(){
+		var newWorldData = this.prepareWorldNamesData();
+		this.newWorldData = newWorldData;
 		this.createMap();
 	}
 
@@ -65,28 +68,28 @@ class DisastersParent extends Component {
 		// setting projection
 		var geoPath = d3.geoPath()
     		.projection( albersProjection );
-    	// console.log(feature(usData, usData.objects.layer1).features);
 
     	this.geoPath = geoPath;
 
     	// reference to the first group
     	var state_names_g = select(node)
 			.select("g");
-
+	
 		// setup paths, styling & event listeners for map
     	select(node)
 	    	.select('g')
     		.selectAll( "path" )
 		    .data([
-	    		...feature(worldData, worldData.objects.countries).features,
+	    		...this.newWorldData,
 	    		...feature(usData, usData.objects.layer1).features,
 	    		])
 		    .enter()
 		    .append( "path" )
 		    .attr("class", "state_paths")
 		    .on("mouseover",function (d){
+		    	var name = d.properties.postal ? d.properties.postal : d.properties.name
 				state_names_g.append("svg:text")
-					.text(d.properties.postal)
+					.text(name)
 					.attr("pointer-events", "none")
 					.style("font-size", "3px")
 					.attr("x", function(){
@@ -96,9 +99,9 @@ class DisastersParent extends Component {
 					.attr("text-anchor","middle")
 					.attr('fill', 'white')
 					.style('font-size', function(){
-						if(d.properties && d.properties.postal){
-							// console.log(geoPath.area(d)/(80*d.properties.postal.length) + "px");
-							var estFontSize = geoPath.area(d)/( 80 * d.properties.postal.length);
+						if(d.properties && (d.properties.postal || d.properties.name)){
+							var name = d.properties.postal ? d.properties.postal : d.properties.name;
+							var estFontSize = geoPath.area(d)/( 80 * name.length);
 							if(estFontSize <= 1){
 								estFontSize = "2px";
 							}
@@ -111,14 +114,35 @@ class DisastersParent extends Component {
 							return estFontSize;
 						}
 					})
-					.attr("class", d.properties.postal);
+					.attr("class", function() {
+						if(d.properties.postal) {
+							return d.properties.postal;
+						}
+						else if(d.properties.name) {
+							return d.properties.name.split(' ').join('');
+						} 
+						else {
+							return "no_name"
+						}
+					});
 
 					d3.select(this)
 						.attr( "fill", "#d67f22" )
 						.style("cursor", "pointer"); 
 			})
 			.on("mouseleave",function (d){
-				state_names_g.select("." + d.properties.postal).remove();
+				var classname = "";
+				if(d.properties.postal) {
+					classname = d.properties.postal;
+				}
+				else if(d.properties.name) {
+					classname = d.properties.name.split(' ').join('');
+				} 
+				else {
+					classname = "no_name"
+				}
+
+				state_names_g.select("." + classname).remove();
 
 				d3.select(this)
 					.attr( "fill", "#00517a" )
@@ -145,6 +169,21 @@ class DisastersParent extends Component {
 
 		select(node)
 			.call(zoom);
+    }
+
+    // iterate through the node world data and add the names in from static json
+    prepareWorldNamesData = () => {
+    	var obj = {}
+    	var newWorldData = [...feature(worldData, worldData.objects.countries).features]
+    	for(var i=0; i < newWorldData.length; i++) {
+    		for(var j=0; j < worldNames.length; j++) {
+    			if(parseInt(newWorldData[i].id) === parseInt(worldNames[j].id)) {
+    				newWorldData[i].properties["name"] = worldNames[j].name;
+    			}
+    		}
+    	}
+
+    	return newWorldData;
     }
 
     CreateYearFilter = (start, end) => {
