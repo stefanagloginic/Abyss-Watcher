@@ -30,14 +30,15 @@ class DisastersParent extends Component {
 
 	componentDidMount(){
 		var newWorldData = this.prepareWorldNamesData();
-		this.createMap(newWorldData);
+		this.newWorldData = newWorldData;
+		this.createMap();
 	}
 
    	componentDidUpdate() {
 		this.createMap();
    	}
 
-	createMap = (newWorldData) => {
+	createMap = () => {
     	const node = this.node;
     	var width = window.innerWidth;
 		var height = window.innerHeight;
@@ -79,7 +80,7 @@ class DisastersParent extends Component {
 	    	.select('g')
     		.selectAll( "path" )
 		    .data([
-	    		...newWorldData,
+	    		...this.newWorldData,
 	    		...feature(usData, usData.objects.layer1).features,
 	    		])
 		    .enter()
