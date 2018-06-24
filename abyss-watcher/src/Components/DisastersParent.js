@@ -10,9 +10,10 @@ import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
 import d3Tip from 'd3-tip'
-import plotTsunamiPoints from '../D3/Tsunami'
+// import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
-import plotVolcanoPoints from '../D3/Volcano'
+// import plotVolcanoPoints from '../D3/Volcano'
+import plotTornadoPoints from '../D3/Tornado'
 
 /*----------------Components---------------------*/
 import GraphIcon from '../Icons/graph'
@@ -159,9 +160,11 @@ class DisastersParent extends Component {
 
 		plotEarthquakePoints(node, geoPath, earthquake_options.visible, this.CreateYearFilter(year, year));
 
-		plotTsunamiPoints(node, geoPath, tsunami_options.visible, this.CreateYearFilter(year, year));
+		// plotTsunamiPoints(node, geoPath, tsunami_options.visible, this.CreateYearFilter(year, year));
 
-		plotVolcanoPoints(node, geoPath, volcano_options.visible, this.CreateYearFilter(year, year));
+		// plotVolcanoPoints(node, geoPath, volcano_options.visible, this.CreateYearFilter(year, year));
+
+		plotTornadoPoints(node, geoPath, tornado_options.visible, this.CreateYearFilter(year, year));
 		// zoom capability
 		var zoom = d3.zoom()
 		    .scaleExtent([1, 20])

@@ -30,6 +30,12 @@
   fill: #faff72;
 }
 
+.tornado_points {
+  fill-opacity: .5;
+  stroke: #dddddd;
+  fill: #cecece; 
+}
+
 .d3-tip {
   line-height: 1;
   font-weight: bold;
