@@ -31,18 +31,19 @@ export default (node, geoPath, visible, filter) => {
 		.attr('class', 'd3-tip-storm d3-tip')
 		.offset([-10, 0])
 		.html(function(d) {
-			var date = d.properties.Month + "/" + d.properties.Day + "/" + d.properties.Year;
-			var location = d.properties.Location.toLowerCase();
+			var location = d.properties.Location;
+			var height = d.properties.Length ? d.properties.Length + "km": "Unknown";
+			var width = d.properties.Width ? d.properties.Width + "km" : "Unknown";
 		    return "<div style='text-align:center;'><strong style='font-size:15px;color:#dddddd;'>" 
 		    	+ d.properties.Type + "</strong></div>" +
 		    	"<div><strong style='font-size:12px;'>Date:</strong> <span style='color:#dddddd;font-size:12px'>" 
-		    	+ date + "</span></div>" +  
+		    	+ d.properties.Date + "</span></div>" +  
 		    	"<div><strong style='font-size:12px'>Location:</strong> <span style='color:#dddddd;font-size:12px'>" 
 		    	+ location + "</span></div>" +
 		    	"<div><strong style='font-size:12px'>Width:</strong> <span style='color:#dddddd;font-size:12px'>" 
-		    	+ d.properties.Width + "</span></div>" + 
-		    	"<div><strong style='font-size:12px'>Length:</strong> <span style='color:#dddddd;font-size:12px'>" 
-		    	+ d.properties.Height + "km" + "</span></div>";
+		    	+ width + "</span></div>" + 
+		    	"<div><strong style='font-size:12px'>Height:</strong> <span style='color:#dddddd;font-size:12px'>" 
+		    	+ height + "</span></div>";
 		});
 
 	// add storms points
