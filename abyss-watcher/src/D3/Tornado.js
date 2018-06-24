@@ -23,7 +23,7 @@ export default (node, geoPath, visible, filter) => {
 	});
 
 	var radius = d3.scaleSqrt()
-	    .domain([0, 1000])
+	    .domain([0, 1500])
 	    .range([0, 10]);
 
 	// setup tooltip
