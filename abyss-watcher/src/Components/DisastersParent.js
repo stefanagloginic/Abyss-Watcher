@@ -33,9 +33,9 @@ class DisastersParent extends Component {
 	}
 
 	async componentDidMount(){
-		// var earthquake_data = await this.getDisasterData();
-  //  		this.earthquake_data = earthquake_data;
-   		// console.log(this.earthquake_data);
+		var earthquake_data = await this.getDisasterData();
+   		this.earthquake_data = earthquake_data;
+   		console.log(this.earthquake_data);
 		var newWorldData = this.prepareWorldNamesData();
 		this.newWorldData = newWorldData;
 		this.createMap();
