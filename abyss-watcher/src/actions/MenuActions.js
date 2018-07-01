@@ -1,3 +1,5 @@
+import obtainData from '../utils/obtainData';
+
 export const setEarthquakeOptions = (options) => {
   	return (dispatch) => {
     	dispatch({
@@ -58,6 +60,16 @@ export const setYear = (year) => {
     dispatch({
       type: 'SET_YEAR',
       payload: year,
+    });
+  }
+}
+
+export const getEarthquakesByYear = (year) => {
+  return async (dispatch) => {
+    var data = await obtainData("https://abyss-watcher-backend.herokuapp.com/abyss-watcher/v1/earthquakes?year=" + year.toString());
+    dispatch({
+      type: 'SET_EARTHQUAKE_DATA',
+      payload: data,
     });
   }
 }

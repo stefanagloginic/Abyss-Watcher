@@ -1,22 +1,21 @@
 import { select } from 'd3-selection'
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
-import earthquake_data from '../data/earthquake_dataset'
+// import earthquake_data from '../data/earthquake_dataset'
+import obtainData from '../utils/obtainData'
 
 // expecting the svg node, the path to plot points along, visible boolean, 
 // and a filter function that will define what data points to display
-export default (node, geoPath, visible, filter) => {
-	if(!visible) {
-		return;
-	}
-	
+export default (node, geoPath, earthquake_data) => {
 	var earthquakes = select(node)
 		.append( "g" )
 		.attr("class", "earthquake_points");
 
-	var earthquake_features = earthquake_data.earthquake_json.features.filter(function(obj) {
-		return filter(obj.properties.Date);
-	}).sort(function(a, b) {
+	if(typeof earthquake_data == 'undefined') {
+		return;
+	}
+
+	var earthquake_features = earthquake_data.sort(function(a, b) {
 		return b.properties.Magnitude - a.properties.Magnitude;
 	});
 

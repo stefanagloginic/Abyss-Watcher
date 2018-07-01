@@ -14,6 +14,9 @@ const defaultStoreValues = {
 		tsunami_options: {type: "TSUNAMIS", visible: false},
 		volcano_options: {type: "VOLCANOES", visible: false},
 		year: 2005,
+	},
+	disastersData: {
+		static_earthquake_data: {},
 	}
 };
 

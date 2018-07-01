@@ -10,33 +10,56 @@ import { feature } from 'topojson-client'
 import * as d3 from 'd3'
 import '../Stylesheets/DisastersParent.css'
 import d3Tip from 'd3-tip'
-// import plotTsunamiPoints from '../D3/Tsunami'
+import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
 // import plotVolcanoPoints from '../D3/Volcano'
-import plotTornadoPoints from '../D3/Tornado'
-
+// import plotTornadoPoints from '../D3/Tornado'
+  
 /*----------------Components---------------------*/
 import GraphIcon from '../Icons/graph'
 import IconButton from './IconButton'
 
 /*----------------Redux---------------------*/
 import { connect } from 'react-redux';
-
+import {bindActionCreators} from 'redux';
 import { Link } from 'react-router-dom'
+
+/*---------------Actions--------------------*/
+import { getEarthquakesByYear } from '../actions/MenuActions'
 
 class DisastersParent extends Component {
 	constructor(props){
 		super(props)
 	}
 
-	componentDidMount(){
+	async componentDidMount(){
+		// var earthquake_data = await this.getDisasterData();
+  //  		this.earthquake_data = earthquake_data;
+   		// console.log(this.earthquake_data);
 		var newWorldData = this.prepareWorldNamesData();
 		this.newWorldData = newWorldData;
 		this.createMap();
 	}
 
-   	componentDidUpdate() {
+   	async componentDidUpdate() {
+   		// this.earthquake_data = await this.getDisasterData();
 		this.createMap();
+   	}
+
+   	async getDisasterData(){
+   		const { 
+			earthquake_options, 
+			tsunami_options,
+			tornado_options,
+			storm_options,
+			hurricane_options,
+			volcano_options,
+			year
+		} = this.props.selectionData;
+
+   		await this.props.getEarthquakesByYear(year);
+   		var earthquake_data = this.props.disastersData.static_earthquake_data;
+   		return earthquake_data;
    	}
 
 	createMap = () => {
@@ -158,13 +181,13 @@ class DisastersParent extends Component {
 		state_names_g.append("g")
 			.attr("class", "us_states_names");
 
-		plotEarthquakePoints(node, geoPath, earthquake_options.visible, this.CreateYearFilter(year, year));
+		// plotEarthquakePoints(node, geoPath, this.earthquake_data);
 
-		// plotTsunamiPoints(node, geoPath, tsunami_options.visible, this.CreateYearFilter(year, year));
+		plotTsunamiPoints(node, geoPath, tsunami_options.visible, this.CreateYearFilter(year, year));
 
 		// plotVolcanoPoints(node, geoPath, volcano_options.visible, this.CreateYearFilter(year, year));
 
-		plotTornadoPoints(node, geoPath, tornado_options.visible, this.CreateYearFilter(year, year));
+		// plotTornadoPoints(node, geoPath, tornado_options.visible, this.CreateYearFilter(year, year));
 		// zoom capability
 		var zoom = d3.zoom()
 		    .scaleExtent([1, 20])
@@ -223,8 +246,15 @@ class DisastersParent extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		selectionData: state.menuOptions
+		selectionData: state.menuOptions,
+		disastersData: state.disastersData
 	}
 }
 
-export default connect(mapStateToProps)(DisastersParent);
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		getEarthquakesByYear: getEarthquakesByYear, 
+	}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisastersParent);
