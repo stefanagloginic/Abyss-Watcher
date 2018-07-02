@@ -2,11 +2,10 @@ import { select } from 'd3-selection'
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
 import { feature } from 'topojson-client'
-import volcano_with_impacts_data from '../data/volcano_with_impacts_dataset'
 
 // expecting the svg node, the path to plot points along, visible boolean, 
 // and a filter function that will define what data points to display
-export default (node, geoPath, visible, filter) => {
+export default (node, geoPath, visible, volcano_data) => {
 	if(!visible) {
 		return;
 	}
@@ -15,9 +14,7 @@ export default (node, geoPath, visible, filter) => {
 		.append( "g" )
 		.attr("class", "volcano_points");
 
-	var volcano_features = volcano_with_impacts_data.volcano_json.features.filter(function(obj, i) {
-		return filter('1/1/' + obj.properties.Year);
-	}).sort(function(a, b) {
+	var volcano_features = volcano_data.sort(function(a, b) {
 		return b.properties.Elevation - a.properties.Elevation;
 	});
 

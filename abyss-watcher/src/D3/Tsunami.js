@@ -1,11 +1,10 @@
 import { select } from 'd3-selection'
 import * as d3 from 'd3'
-import tsunami_data from '../data/tsunami_dataset'
 import d3Tip from 'd3-tip'
 
 // expecting the svg node, the path to plot points along, visible boolean, 
 // and a filter function that will define what data points to display
-export default (node, geoPath, visible, filter) => {
+export default (node, geoPath, visible, tsunami_data) => {
 	if(!visible) {
 		return;
 	}
@@ -15,9 +14,7 @@ export default (node, geoPath, visible, filter) => {
 		.attr("class", "tsunami_points");
 
 
-	var tsunami_features = tsunami_data.tsunami_json.features.filter(function(obj) {
-		return filter('1/1/' + obj.properties.Year) && obj.properties.Latitude.length != 0;
-	}).sort(function(a, b) {
+	var tsunami_features = tsunami_data.sort(function(a, b) {
 		return b.properties.Max_height - a.properties.Max_height;
 	});
 

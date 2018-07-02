@@ -12,8 +12,8 @@ import '../Stylesheets/DisastersParent.css'
 import d3Tip from 'd3-tip'
 import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
-// import plotVolcanoPoints from '../D3/Volcano'
-// import plotTornadoPoints from '../D3/Tornado'
+import plotVolcanoPoints from '../D3/Volcano'
+import plotTornadoPoints from '../D3/Tornado'
   
 /*----------------Components---------------------*/
 import GraphIcon from '../Icons/graph'
@@ -25,28 +25,32 @@ import {bindActionCreators} from 'redux';
 import { Link } from 'react-router-dom'
 
 /*---------------Actions--------------------*/
-import { getEarthquakesByYear } from '../actions/MenuActions'
+import { getEarthquakesByYear, getTsunamisByYear, getTornadoesByYear, getVolcanoesByYear } from '../actions/MenuActions'
 
 class DisastersParent extends Component {
 	constructor(props){
 		super(props)
 	}
 
-	async componentDidMount(){
-		var earthquake_data = await this.getDisasterData();
-   		this.earthquake_data = earthquake_data;
-   		console.log(this.earthquake_data);
+	componentDidMount(){
+		this.getProps();
+		this.props.getEarthquakesByYear(this.year);
+   		this.props.getTsunamisByYear(this.year);
+   		this.props.getTornadoesByYear(this.year);
+   		this.props.getVolcanoesByYear(this.year);
+
 		var newWorldData = this.prepareWorldNamesData();
 		this.newWorldData = newWorldData;
+
 		this.createMap();
 	}
 
-   	async componentDidUpdate() {
-   		// this.earthquake_data = await this.getDisasterData();
+   	componentDidUpdate() {
+   		this.getProps();
 		this.createMap();
    	}
 
-   	async getDisasterData(){
+   	getProps(){
    		const { 
 			earthquake_options, 
 			tsunami_options,
@@ -57,24 +61,30 @@ class DisastersParent extends Component {
 			year
 		} = this.props.selectionData;
 
-   		await this.props.getEarthquakesByYear(year);
-   		var earthquake_data = this.props.disastersData.static_earthquake_data;
-   		return earthquake_data;
+		const { 
+			static_earthquake_data,
+			static_tsunami_data,
+			static_tornado_data,
+			static_volcano_data,
+		} = this.props.disastersData;
+
+		this.earthquake_options = earthquake_options;
+		this.tsunami_options = tsunami_options;
+		this.volcano_options = volcano_options;
+		this.tornado_options = tornado_options;
+
+		this.static_tsunami_data = static_tsunami_data;
+		this.static_earthquake_data = static_earthquake_data;
+		this.static_volcano_data = static_volcano_data;
+		this.static_tornado_data = static_tornado_data;
+
+		this.year = year;
    	}
 
 	createMap = () => {
     	const node = this.node;
     	var width = window.innerWidth;
 		var height = window.innerHeight;
-		const { 
-			earthquake_options, 
-			tsunami_options,
-			tornado_options,
-			storm_options,
-			hurricane_options,
-			volcano_options,
-			year
-		} = this.props.selectionData;
 
 		select(node).selectAll("g").remove();
 
@@ -181,13 +191,13 @@ class DisastersParent extends Component {
 		state_names_g.append("g")
 			.attr("class", "us_states_names");
 
-		// plotEarthquakePoints(node, geoPath, this.earthquake_data);
+		plotEarthquakePoints(node, geoPath, this.earthquake_options.visible, this.static_earthquake_data);
 
-		plotTsunamiPoints(node, geoPath, tsunami_options.visible, this.CreateYearFilter(year, year));
+		plotTsunamiPoints(node, geoPath, this.tsunami_options.visible, this.static_tsunami_data);
 
-		// plotVolcanoPoints(node, geoPath, volcano_options.visible, this.CreateYearFilter(year, year));
+		plotVolcanoPoints(node, geoPath, this.volcano_options.visible, this.static_volcano_data);
 
-		// plotTornadoPoints(node, geoPath, tornado_options.visible, this.CreateYearFilter(year, year));
+		plotTornadoPoints(node, geoPath, this.tornado_options.visible, this.static_tornado_data);
 		// zoom capability
 		var zoom = d3.zoom()
 		    .scaleExtent([1, 20])
@@ -254,6 +264,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		getEarthquakesByYear: getEarthquakesByYear, 
+		getTsunamisByYear: getTsunamisByYear,
+		getTornadoesByYear: getTornadoesByYear,
+		getVolcanoesByYear: getVolcanoesByYear,
 	}, dispatch);
 }
 

@@ -15,6 +15,7 @@
     "d3-tip": "^0.9.1",
     "d3-transition": "^1.1.1",
     "d3-zoom": "^1.7.1",
+    "debounce": "^1.1.0",
     "ndjson-cli": "^0.3.1",
     "rc-slider": "^8.6.1",
     "react": "^16.3.0",
