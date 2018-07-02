@@ -1,11 +1,10 @@
 import { select } from 'd3-selection'
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
-import storms_data from '../data/storms_dataset'
 
 // expecting the svg node, the path to plot points along, visible boolean, 
 // and a filter function that will define what data points to display
-export default (node, geoPath, visible, filter) => {
+export default (node, geoPath, visible, tornado_data) => {
 	if(!visible) {
 		return;
 	}
@@ -14,9 +13,7 @@ export default (node, geoPath, visible, filter) => {
 		.append( "g" )
 		.attr("class", "tornado_points");
 
-	var storms_features = storms_data.storms_json.features.filter(function(obj) {
-		return filter('1/1/' + obj.properties.Year) && obj.properties.Latitude.length != 0;
-	}).sort(function(a, b) {
+	var storms_features = tornado_data.sort(function(a, b) {
 		var storm_rect_area_a = parseInt(a.properties.Width) * parseInt(a.properties.Length);
 		var storm_rect_area_b = parseInt(b.properties.Width) * parseInt(b.properties.Length);
 		return storm_rect_area_b - storm_rect_area_a;

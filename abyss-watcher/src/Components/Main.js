@@ -7,12 +7,22 @@ import ScaleMenu from './ScaleMenu';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 /*----------------Actions------------------*/
-import { setYear } from '../actions/MenuActions'
+import { setYear, getEarthquakesByYear, getTsunamisByYear, getVolcanoesByYear, getTornadoesByYear } from '../actions/MenuActions'
 /*----------------React Router-------------*/
 import { Switch, Route, withRouter } from 'react-router-dom'
+/*----------------Utils---------------------*/
+import debounce from 'debounce'
 
 
 class Main extends Component {
+	changeYear = debounce((year) => {
+		this.props.setYear(year);
+		this.props.getEarthquakesByYear(year);
+		this.props.getTsunamisByYear(year);
+		this.props.getVolcanoesByYear(year);
+		this.props.getTornadoesByYear(year);
+	}, 150)
+
 	render() {
 		const { year } = this.props.selectionData
 		return (
@@ -28,7 +38,7 @@ class Main extends Component {
 				    </Switch>    
 					<YearSlider
 						defaultValue={ year }
-						onChange={ this.props.setYear }
+						onChange={ this.changeYear }
 					/>
 				</div>
 			</div>
@@ -45,6 +55,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		setYear: setYear, 
+		getEarthquakesByYear: getEarthquakesByYear,
+		getTsunamisByYear: getTsunamisByYear,
+		getVolcanoesByYear: getVolcanoesByYear,
+		getTornadoesByYear: getTornadoesByYear,
 	}, dispatch);
 }
 

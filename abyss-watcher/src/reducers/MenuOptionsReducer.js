@@ -24,6 +24,8 @@ export default function (state = {}, action) {
             return {...state, storm_options: payload};
         case 'SET_YEAR':
             return {...state, year: payload };
+        case 'SET_EARTHQUAKE_DATA':
+            return {...state, static_earthquake_data: payload}
         default:
             break;
     }
