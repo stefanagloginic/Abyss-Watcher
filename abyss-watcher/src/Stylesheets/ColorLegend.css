@@ -1,0 +1,11 @@
+.d3_wrapper {
+  pointer-events: none;
+}
+
+.d3_wrapper:hover {
+  cursor: pointer;
+}
+
+p {
+  color: #cecece;
+}

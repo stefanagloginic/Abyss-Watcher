@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import DataCommunication from './DataCommunication'
+
+/*-----------------css--------------------------*/
+import '../Stylesheets/DisastersParent.css'
+
 /*-----------------d3----------------------------*/
 import worldData from 'world-atlas/world/110m.json'
 import worldNames from '../world-110m-country-names'
@@ -8,7 +11,6 @@ import { geoMercator, geoAlbers, geoPath } from 'd3-geo'
 import { select } from 'd3-selection'
 import { feature } from 'topojson-client'
 import * as d3 from 'd3'
-import '../Stylesheets/DisastersParent.css'
 import d3Tip from 'd3-tip'
 import plotTsunamiPoints from '../D3/Tsunami'
 import plotEarthquakePoints from '../D3/Earthquake'
@@ -18,6 +20,8 @@ import plotTornadoPoints from '../D3/Tornado'
 /*----------------Components---------------------*/
 import GraphIcon from '../Icons/graph'
 import IconButton from './IconButton'
+import DataCommunication from './DataCommunication'
+import Legend from './Legend'
 
 /*----------------Redux---------------------*/
 import { connect } from 'react-redux';
@@ -207,6 +211,14 @@ class DisastersParent extends Component {
 			.call(zoom);
     }
 
+    getPlottedNaturalDisasters = () => {
+    	return Object.values(this.props.selectionData).filter(function(NDObj) {
+    		if(NDObj.type && NDObj.visible) {
+    			return NDObj;
+    		}
+    	});
+    }
+
     // iterate through the node world data and add the names in from static json
     prepareWorldNamesData = () => {
     	var obj = {}
@@ -222,13 +234,6 @@ class DisastersParent extends Component {
     	return newWorldData;
     }
 
-    CreateYearFilter = (start, end) => {
-		return (date) =>{
-			let year = (new Date(date)).getFullYear();
-			return (year >= start && year <= end)
-		}
-	}
-
     zoomed = () => {
     	var node = this.node;
 
@@ -243,6 +248,7 @@ class DisastersParent extends Component {
 			<div className="map_wrapper">
 				<DataCommunication />
 				<IconButton link="/graphs" label="Graphs" icon={<GraphIcon size={65} />} />
+				<Legend plottedND={ this.getPlottedNaturalDisasters() } />
 				<svg 
 					className="map_svg" 
 					ref={node => this.node = node} 
